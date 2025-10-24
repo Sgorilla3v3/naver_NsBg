@@ -1,0 +1,48 @@
+# 네이버 뉴스 수집 설정 파일
+
+# 검색 키워드
+keywords:
+  - 청도혁신센터
+  - 경북시민재단
+  - 로컬임팩트랩
+  - 경북지속가능캠프
+  - 청도군
+
+# 수집 설정
+collection:
+  start_year: 2022                  # 수집 시작 연도
+  display_per_page: 100             # 페이지당 뉴스 개수 (최대 100)
+  max_items_per_query: 1000         # 쿼리당 최대 수집 개수 (API 제한)
+  api_call_delay: 0.1               # API 호출 간격 (초)
+  request_timeout: 10               # 요청 타임아웃 (초)
+
+# 출력 설정
+output:
+  parts_dir: output_parts           # 분할 파일 저장 디렉토리
+  merged_dir: output                # 병합 파일 저장 디렉토리
+  merged_filename: news_merged.csv  # 병합 파일명
+  encoding: utf-8-sig               # 파일 인코딩 (엑셀 호환)
+
+# 로그 설정
+logging:
+  dir: logs                         # 로그 디렉토리
+  level: INFO                       # 로그 레벨 (DEBUG, INFO, WARNING, ERROR)
+  format: "%(asctime)s - %(levelname)s - %(message)s"
+
+# 병렬 처리 설정
+parallel:
+  enabled: false                    # 병렬 처리 사용 여부
+  num_workers: 4                    # 워커 수 (병렬 실행 시)
+
+# 필터링 설정
+filtering:
+  exact_phrase_match: true          # 정확한 문구 매칭 여부
+  remove_duplicates: true           # 중복 제거 여부
+  duplicate_check_column: url       # 중복 체크 기준 컬럼
+
+# 네이버 API 설정
+api:
+  search_endpoint: "https://openapi.naver.com/v1/search"
+  sort: date                        # 정렬 방식 (date: 날짜순, sim: 정확도순)
+  retry_count: 3                    # 실패 시 재시도 횟수
+  retry_delay: 1.0                  # 재시도 간격 (초)
